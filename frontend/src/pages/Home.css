@@ -1,0 +1,26 @@
+.home-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top,
+            #1b2735,
+            #090a0f);
+    font-family: Arial, sans-serif;
+}
+
+.home-hero {
+    text-align: center;
+    color: #ffffff;
+}
+
+.home-hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.home-hero p {
+    font-size: 16px;
+    color: #cfd8dc;
+    margin-bottom: 30px;
+}

@@ -1,0 +1,41 @@
+.dashboard-container {
+  min-height: 100vh;
+  padding: 40px 0;
+  background: radial-gradient(circle at top, #1b2735, #090a0f);
+  font-family: "Inter", Arial, sans-serif;
+  color: white;
+}
+
+/* Header */
+.dashboard-header {
+  max-width: 900px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.dashboard-header h2 {
+  margin-bottom: 6px;
+  font-size: 20px;
+  opacity: 0.9;
+}
+
+.goal-text {
+  font-size: 22px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* Content */
+.dashboard-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Loading */
+.dashboard-loading {
+  text-align: center;
+  font-size: 18px;
+  opacity: 0.85;
+}

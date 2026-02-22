@@ -1,0 +1,130 @@
+.assessment-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #1b2735, #090a0f);
+    font-family: "Inter", Arial, sans-serif;
+    padding: 30px 0;
+}
+
+.assessment-card {
+    width: 100%;
+    max-width: 680px;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 36px 40px;
+    border-radius: 22px;
+    backdrop-filter: blur(12px);
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.35),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    animation: fadeUp 0.6s ease;
+}
+
+.assessment-card h2 {
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 28px;
+}
+
+/* Question card */
+.question-card {
+    background: #f7f9fb;
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    border: 1px solid #e3e6ea;
+    transition: all 0.25s ease;
+}
+
+.question-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.question-index {
+    display: inline-block;
+    background: #2c5364;
+    color: white;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+}
+
+.question-text {
+    font-size: 15px;
+    margin: 10px 0 12px;
+}
+
+/* Input */
+.question-card input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #d0d0d0;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.question-card input:focus {
+    border-color: #2c5364;
+    box-shadow: 0 0 0 3px rgba(44, 83, 100, 0.15);
+}
+
+/* Button */
+.submit-btn {
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg, #2c5364, #203a43);
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(44, 83, 100, 0.45);
+}
+
+.submit-btn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Loading */
+.assessment-loading {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #1b2735, #090a0f);
+    color: white;
+    font-size: 18px;
+}
+
+/* Animation */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
