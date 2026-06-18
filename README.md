@@ -1,51 +1,78 @@
-# 🚀 AI Powered Roadmap Generator
+# Blueprint.ai
 
-An intelligent roadmap generation platform built using the MERN Stack and powered by Ollama LLM.
+A personalized, AI-driven learning roadmap generator. 
 
-This application generates personalized learning roadmaps based on user goals, current skill level, and selected technology domain.
+Blueprint takes your current skill level, target goal, and available time, and builds a hyper-customized, day-by-day learning schedule. It drops the generic tutorial paths and generates actionable, hour-by-hour tasks powered by Google's Gemini API. 
 
-## 🧠 How It Works
+## Features
 
-- User selects a domain (e.g., Web Development, AI, DevOps)
-- Inputs their current skill level
-- The backend sends a structured prompt to Ollama LLM
-- AI generates a step-by-step roadmap
-- The roadmap is displayed in a clean UI format
+- **Dynamic Roadmap Generation:** Takes your prompt and outputs a highly structured, realistic learning path.
+- **Progress Tracking:** Interactive checklists to track your daily and hourly progress.
+- **User Authentication:** Save, manage, and revisit your generated roadmaps by securely logging in.
+- **PDF Export:** Download your roadmaps locally as perfectly-formatted, dark-mode PDFs.
+- **Premium UI:** Built with a modern "cyber-glass" aesthetic and micro-animations.
 
----
+## Tech Stack
 
-## ✨ Features
+- **Frontend:** React (Vite), plain CSS (no UI libraries, all custom styling), html2pdf for exports.
+- **Backend:** Node.js, Express.
+- **Database:** MongoDB (Mongoose) with bcrypt for password hashing and JWT for session management.
+- **AI Integration:** Google Gemini API.
 
-- 🔐 User Authentication (JWT Based)
-- 🤖 AI Generated Dynamic Roadmaps
-- 📚 Domain-Based Structured Learning Paths
-- ⚡ Real-time API Integration with Ollama
-- 💾 Save & Manage Generated Roadmaps
-- 📱 Responsive UI
+## Getting Started
 
----
+### Prerequisites
+Make sure you have Node.js and MongoDB installed on your machine. You'll also need a Gemini API key.
 
-## 🛠️ Tech Stack
+### Installation
 
-Frontend:
-- React.js
-- CSS
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/riteeessshhh/blueprint.ai.git
+   cd blueprint.ai
+   ```
 
-Backend:
-- Node.js
-- Express.js
+2. Install backend dependencies:
+   ```bash
+   cd backend
+   npm install
+   ```
 
-Database:
-- MongoDB
+3. Install frontend dependencies:
+   ```bash
+   cd ../frontend
+   npm install
+   ```
 
-AI Integration:
-- Ollama (Local LLM Model)
+### Environment Variables
 
----
+Create a `.env` file in the `backend` directory with the following variables:
 
-## 🎯 Use Case
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+GEMINI_API_KEY=your_gemini_api_key
+JWT_SECRET=your_jwt_secret_key
+```
 
-This platform helps students and developers:
-- Plan structured learning journeys
-- Avoid random tutorial hopping
-- Get AI-curated step-by-step paths
+### Running the App
+
+1. Start the backend development server:
+   ```bash
+   cd backend
+   npm run dev
+   ```
+
+2. Open a new terminal and start the frontend:
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+3. Navigate to `http://localhost:5173` in your browser.
+
+## Contributing
+Feel free to open an issue or submit a pull request if you want to help improve the project!
+
+## License
+MIT
