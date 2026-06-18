@@ -1,23 +1,21 @@
 const Task = require("../models/Task");
-const Memory = require("../models/Memory");
 
-exports.taskAction = async (req, res) => {
-  const { action } = req.body;
-  const task = await Task.findById(req.params.taskId);
-  const memory = await Memory.findOne({ goalId: task.goalId });
+exports.toggleSubtask = async (req, res) => {
+  try {
+    const { taskId, subtaskId } = req.params;
+    
+    const task = await Task.findById(taskId);
+    if (!task) return res.status(404).json({ error: "Task not found" });
 
-  if (action === "done") {
-    task.status = "done";
-    memory.completedTasks.push(task.title);
+    const subtask = task.subtasks.id(subtaskId);
+    if (!subtask) return res.status(404).json({ error: "Subtask not found" });
+
+    subtask.completed = !subtask.completed;
+    await task.save();
+
+    res.json(task);
+  } catch (error) {
+    console.error("Failed to toggle subtask", error);
+    res.status(500).json({ error: "Failed to toggle subtask" });
   }
-
-  if (action === "skip") {
-    task.status = "skipped";
-    memory.skippedTasks.push(task.title);
-  }
-
-  await task.save();
-  await memory.save();
-
-  res.json({ message: "Task updated", task });
 };

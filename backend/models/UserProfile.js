@@ -5,7 +5,8 @@ const schema = new mongoose.Schema({
   level: String,
   mathStrength: String,
   learningStyle: String,
-  goalType: String
+  goalType: String,
+  backgroundSummary: String
 });
 
 module.exports = mongoose.model("UserProfile", schema);

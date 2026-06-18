@@ -16,11 +16,13 @@ exports.generateQuestions = async (req, res) => {
     const prompt = `
 You are an AI assessment agent.
 
-User wants to learn:
-"${goal.title}"
+User Profile & Constraints:
+- Topic: "${goal.title}"
+- Final Goal: "${goal.finalGoal || 'General Knowledge'}"
+- Time Available: ${goal.days} days, ${goal.dailyHours} hours/day.
 
 Your task:
-Generate assessment questions.
+Generate 5 assessment questions tailored specifically to their goal and strict timeline constraint.
 
 VERY IMPORTANT RULES (follow strictly):
 - Return ONLY valid JSON
@@ -46,18 +48,18 @@ STRICT FORMAT (exactly like this):
 ]
 `;
 
-    // 3️⃣ Call LLM
-    const output = await callLLM(prompt);
-
     let questions;
     try {
+      const output = await callLLM(prompt);
       questions = extractJSON(output);
     } catch (err) {
-      // 🔁 SAFE FALLBACK (agent never breaks)
+      // 🔁 SAFE FALLBACK — handles API failures (rate limit, 503) and JSON parse errors
+      console.warn("Question LLM failed, using fallback questions:", err.message);
       questions = [
-        { question: "Do you have basic programming experience?", type: "yes_no" },
+        { question: `Have you studied ${goal.title} before?`, type: "yes_no" },
+        { question: "How would you rate your current skill level?", type: "beginner_intermediate_advanced" },
         { question: "How comfortable are you with math or logic?", type: "low_medium_high" },
-        { question: "Have you studied this topic before?", type: "yes_no" },
+        { question: "Do you prefer learning through theory or hands-on practice?", type: "yes_no" },
         { question: "What is your learning goal?", type: "interview_project_college" }
       ];
     }

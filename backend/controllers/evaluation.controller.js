@@ -26,23 +26,25 @@ Required format:
   "level": "beginner | intermediate",
   "mathStrength": "low | medium | high",
   "learningStyle": "theory | practical",
-  "goalType": "interview | project | college"
+  "goalType": "interview | project | college",
+  "backgroundSummary": "A concise 1-sentence summary of what the user already knows (e.g., 'User already knows C++, OOP, and DSA, but is new to JS')"
 }
 `;
-
-    const output = await callLLM(prompt);
 
     let profile;
 
     try {
+      const output = await callLLM(prompt);
       profile = extractJSON(output);
     } catch (err) {
-      // 🔁 FALLBACK (agent never breaks)
+      // 🔁 FALLBACK — handles both API failures (rate limits, network) and JSON parse errors
+      console.warn("Evaluation LLM failed, using fallback profile:", err.message);
       profile = {
         level: "beginner",
         mathStrength: "low",
         learningStyle: "practical",
-        goalType: "college"
+        goalType: "college",
+        backgroundSummary: "Absolute beginner with no prior experience specified."
       };
     }
 

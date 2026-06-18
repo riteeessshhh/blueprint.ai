@@ -1,42 +1,35 @@
-function sanitizeLooseJSON(text) {
-  // Fix unquoted values like: "type": yes_no
-  return text
-    // quote unquoted string values
-    .replace(/:\s*([a-zA-Z_]+)(\s*[,\}])/g, ':"$1"$2')
-    // quote unquoted questions
-    .replace(/"question"\s*:\s*([^",\n]+)(\s*[,\}])/g, '"question":"$1"$2');
-}
-
 function extractJSON(text) {
   if (!text || typeof text !== "string") {
     throw new Error("LLM response is not a string");
   }
 
-  let cleaned = text
-    .replace(/[“”]/g, '"')
-    .replace(/[‘’]/g, "'");
+  const startObj = text.indexOf("{");
+  const startArr = text.indexOf("[");
+  const endObj = text.lastIndexOf("}");
+  const endArr = text.lastIndexOf("]");
 
-  // Prefer ARRAY JSON
-  const start = cleaned.indexOf("[");
-  const end = cleaned.lastIndexOf("]");
+  let start = -1;
+  let end = -1;
 
-  if (start === -1 || end === -1) {
-    throw new Error("No JSON array found");
+  if (startArr !== -1 && (startObj === -1 || startArr < startObj)) {
+    start = startArr;
+    end = endArr;
+  } else if (startObj !== -1) {
+    start = startObj;
+    end = endObj;
   }
 
-  let jsonString = cleaned.slice(start, end + 1);
+  if (start === -1 || end === -1) {
+    throw new Error("No JSON object or array found");
+  }
 
-  // 🔥 SANITIZE BAD JSON
-  jsonString = sanitizeLooseJSON(jsonString);
-
-  // Remove trailing commas
-  jsonString = jsonString.replace(/,\s*([\]}])/g, "$1");
+  const jsonString = text.slice(start, end + 1);
 
   try {
     return JSON.parse(jsonString);
   } catch (err) {
     console.error("❌ JSON PARSE FAILED");
-    console.error("SANITIZED JSON:\n", jsonString);
+    console.error("RAW JSON:\n", jsonString);
     throw err;
   }
 }
